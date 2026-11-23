@@ -375,6 +375,54 @@ footer small{display:block;font-weight:500;opacity:.7;font-size:13px}
 footer button{font-weight:800;min-height:44px}
 @media(max-width:900px){.c-left,.c-right{grid-column:1/-1}.big .ln:nth-child(2){padding-left:0}}
 
+/* ===== mobile polish ===== */
+.on-touch{display:none}
+@media(hover:none){.on-mouse{display:none}.on-touch{display:inline}}
+@media(max-width:700px){
+  .nav{mix-blend-mode:normal;background:rgba(12,11,9,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:10px 16px;color:var(--cream);border-bottom:1px solid rgba(243,234,214,.08)}
+  .brand{font-size:24px}
+  .menu-btn{border-color:rgba(243,234,214,.5);padding:8px 16px;min-height:40px}
+  .hero{min-height:560px}
+  .hero-type{justify-content:flex-start;padding-top:max(150px,19svh);font-size:clamp(56px,17vw,120px)}
+  .hero-ui{padding:76px 18px 22px}
+  .hello b{font-size:40px}
+  .hero-desc{font-size:15.5px;max-width:30ch;margin-bottom:14px;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+  .btn{min-height:52px;font-size:14px;padding-left:22px}
+  .scroll-ind{display:none}
+  .about{padding:14vh 0 12vh}
+  .statement{font-size:clamp(40px,11.5vw,60px)}
+  .philo{margin-top:6vh;font-size:16.5px}
+  .principles{margin-top:32px;gap:18px}
+  .pr h3{font-size:26px}
+  .sec-head{margin-bottom:6vh}
+  .sec-title{font-size:clamp(56px,17vw,96px)}
+  .services{padding:12vh 0 14vh}
+  .card{min-height:500px;border-radius:26px}
+  .card .win{min-height:240px}
+  .card .body{padding:20px}
+  .card h3{font-size:36px}
+  .work{padding:12vh 0 20vh}
+  .gallery{row-gap:8vh}
+  .meta h3{font-size:32px}
+  .reel{padding:12vh 0 14vh}
+  .player{border-radius:18px}
+  .p-top{padding:12px 14px;font-size:11px}
+  .p-bar{gap:8px;padding:30px 10px 10px}
+  .p-btn{width:40px;height:40px}
+  #pFs{display:none}
+  .chapters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:0 18px 4px;scroll-snap-type:x mandatory}
+  .chapters::-webkit-scrollbar{display:none}
+  .chapters button{flex:none;scroll-snap-align:start}
+  .vw-head{margin-top:8vh}
+  .vcard{flex:0 0 58%}
+  .contact{padding-top:12vh}
+  .big{font-size:clamp(48px,14.5vw,80px)}
+  .c-row{margin-top:6vh}
+  .btn.xl{min-height:62px;font-size:16px;width:100%;justify-content:space-between}
+  .socials a{font-size:30px;padding:14px 0}
+  footer{flex-direction:column;align-items:flex-start;gap:12px;padding-bottom:max(26px,env(safe-area-inset-bottom));margin-top:8vh}
+  #bubble{font-size:15px;max-width:48vw;padding:7px 11px}
+}
 @media(prefers-reduced-motion:reduce){.grain{animation:none}.mouse::after{animation:none}}
 </style>
 </head>
@@ -473,7 +521,7 @@ footer button{font-weight:800;min-height:44px}
     <div class="wrap">
       <div class="grid12 sec-head">
         <h2 class="sec-title rl"><span class="ln"><span>Selected</span></span><span class="ln"><span>Work</span></span></h2>
-        <p class="sec-intro" data-rv>Carruseles, piezas gráficas, webs e identidades. Pasa el cursor por cada pantalla.</p>
+        <p class="sec-intro" data-rv>Carruseles, piezas gráficas, webs e identidades. <span class="on-mouse">Pasa el cursor por cada pantalla.</span><span class="on-touch">Toca «Ver proyecto» para verlo en grande.</span></p>
       </div>
       <div class="gallery" id="gallery"></div>
     </div>
@@ -501,7 +549,7 @@ footer button{font-weight:800;min-height:44px}
       <div class="reel-foot">
         <div class="chapters" id="chapters"></div>
       </div>
-      <div class="vw-head"><h3>Vídeos completos</h3><p>Pasa el cursor para ver una vista previa. Haz clic para verlo entero con sonido.</p></div>
+      <div class="vw-head"><h3>Vídeos completos</h3><p><span class="on-mouse">Pasa el cursor para ver una vista previa. Haz clic para verlo entero con sonido.</span><span class="on-touch">Desliza para ver más y toca un vídeo para verlo entero con sonido.</span></p></div>
       <div class="vwall" id="vwall"></div>
     </div>
   </section>
@@ -605,6 +653,7 @@ $('#vwall').innerHTML = VIDEOS.map(v=>`<article class="vcard" data-v="${v.id}" d
 const fineP = matchMedia('(hover:hover) and (pointer:fine)').matches;
 document.querySelectorAll('.vcard').forEach(c=>{ const vid=c.querySelector('video');
   if(fineP){ c.addEventListener('pointerenter',()=>{ vid.play().catch(()=>{}); }); c.addEventListener('pointerleave',()=>{ vid.pause(); }); } });
+if(!fineP && 'IntersectionObserver' in window){ const vio=new IntersectionObserver(es=>es.forEach(en=>{ const v=en.target.querySelector('video'); if(en.isIntersecting && en.intersectionRatio>.7){ v.preload='auto'; v.play().catch(()=>{}); } else v.pause(); }),{threshold:[0,.7,1]}); document.querySelectorAll('.vcard').forEach(c=>vio.observe(c)); }
 /* lightbox */
 const lb=$('#lb'), lbC=$('#lbC'), lbCap=$('#lbCap');
 const openLB=(html,cap)=>{ lbC.innerHTML=html; lbCap.textContent=cap||''; lb.classList.add('open'); document.body.style.overflow='hidden'; window.APP && APP.lenis && APP.lenis.stop(); const v=lbC.querySelector('video'); if(v){ v.play().catch(()=>{}); } $('#lbX').focus(); };
@@ -735,7 +784,7 @@ const MSG=[['¡Hola! Soy Nohely','¿Hablamos de tu proyecto?','Escríbeme por Wh
   ['¡Dale al play!','Edito reels que enganchan','¿Hablamos de tu proyecto?'],
   ['¡Escríbeme por WhatsApp!','Hablemos de tus proyectos','¡Te leo!']];
 const B={x:20,phase:0,facing:1,still:2,wave:0,mode:'front',t:0,h:200,w:80,dpr:Math.min(devicePixelRatio||1,2),sc:1,mi:0,mt:0,sec:-1};
-const bsize=()=>{ B.h=innerWidth<700?120:Math.round(Math.max(170,Math.min(250,innerHeight*.27))); B.w=Math.round(B.h*.4); bud.width=Math.round(B.w*B.dpr); bud.height=Math.round(B.h*B.dpr); bud.style.width=B.w+'px'; bud.style.height=B.h+'px'; };
+const bsize=()=>{ B.h=innerWidth<700?92:Math.round(Math.max(170,Math.min(250,innerHeight*.27))); B.w=Math.round(B.h*.4); bud.width=Math.round(B.w*B.dpr); bud.height=Math.round(B.h*B.dpr); bud.style.width=B.w+'px'; bud.style.height=B.h+'px'; };
 bsize(); addEventListener('resize',bsize);
 gsap.ticker.add((time,dtMs)=>{
   if(!window.Nohely || !Nohely.ready()) return;
@@ -768,7 +817,7 @@ gsap.ticker.add((time,dtMs)=>{
   bud.style.transform=`translate(${B.x}px,0) scale(${B.sc})`;
   bctx.setTransform(B.dpr,0,0,B.dpr,0,0);
   Nohely.draw(bctx,{w:B.w,h:B.h},{mode:B.mode,t:B.t,wave:B.wave,phase:B.phase,speed:Math.min(1,.5+v/240),facing:B.facing});
-  bub.style.opacity=fadeOk?1:0;
+  const small=innerWidth<700; bub.style.opacity=(fadeOk && (!small || B.still>.7 || inContact))?1:0;
   const bw=bub.offsetWidth||160, right=B.x+B.w*(.5+.25*B.sc);
   const bx = (inContact || right+bw>innerWidth-8) ? Math.max(8,B.x-bw+B.w*.2) : right;
   bub.style.transform=`translate(${bx}px,${innerHeight-B.h*B.sc-(bub.offsetHeight||30)+(innerWidth<700?2:B.h*.12)}px)`;
@@ -1045,7 +1094,7 @@ addCt(M(new THREE.IcosahedronGeometry(1, 0), new THREE.MeshPhysicalMaterial({ co
 /* ---------- ambient floaties ---------- */
 const amb = new THREE.Group(); world.add(amb);
 const geos = [STAR, SPH, CUBE, TOR], cols = [C.lime, C.pink, C.cobalt, C.orange, C.lav, C.red, C.yellow];
-for (let i = 0; i < (mobile ? 8 : 14); i++) { const g = geos[i % 4]; const o = M(g, mat(cols[i % cols.length], { clearcoat: 1, roughness: .25 }), [0, 0, 0], [Math.random() * 3, Math.random() * 3, 0]);
+for (let i = 0; i < (mobile ? 5 : 14); i++) { const g = geos[i % 4]; const o = M(g, mat(cols[i % cols.length], { clearcoat: 1, roughness: .25 }), [0, 0, 0], [Math.random() * 3, Math.random() * 3, 0]);
   const side = i % 2 ? 1 : -1; o.userData = { nx: side * (0.62 + ((i * 53) % 30) / 100), z: -1 - ((i * 29) % 60) / 10, yy: ((i * 0.618) % 1), par: 0.25 + ((i * 17) % 50) / 100, s: (g === SPH ? 0.22 : g === TOR ? 0.22 : g === STAR ? 0.3 : 0.32) * (0.8 + ((i * 7) % 5) / 10), rs: 0.2 + (i % 5) * 0.12 };
   amb.add(o); }
 
@@ -1092,8 +1141,9 @@ const tick = () => {
 
   const aspect = innerWidth / innerHeight, fit = aspect < 1.25 ? Math.pow(1.25 / aspect, 0.85) : 1;
   const px = APP.ptr.nx || 0, py = APP.ptr.ny || 0;
-  camera.position.set(cur.cam[0] + px * 0.35, cur.cam[1] - py * 0.2, cur.cam[2] * fit);
-  look.set(cur.look[0], cur.look[1], cur.look[2]); camera.lookAt(look);
+  const dropM = aspect < 0.8 ? 2.2 * (w[0] || 0) : 0;
+  camera.position.set(cur.cam[0] + px * 0.35, cur.cam[1] - py * 0.2 + dropM, cur.cam[2] * fit);
+  look.set(cur.look[0], cur.look[1] + dropM, cur.look[2]); camera.lookAt(look);
   camera.updateMatrixWorld();
 
   // hero
@@ -1153,7 +1203,7 @@ const tick = () => {
       const push = d < R ? (R - d) * 0.75 : 0; u.off.x += ((d ? dx / d : 0) * push - u.off.x) * k * 1.4; u.off.y += ((d ? dy / d : 0) * push - u.off.y) * k * 1.4;
       o.position.set(v4.x + u.off.x, v4.y + u.off.y + Math.sin(t + u.ph) * 0.15, v4.z - (1 - cur.ct) * 6);
       if (o !== mug2) { o.rotation.x += dt * 0.3; o.rotation.y += dt * (0.4 + push * 0.8); } else { o.rotation.y = 0.3 + Math.sin(t * 0.6) * 0.3; }
-      o.scale.setScalar(Math.max(0.001, cur.ct * u.s * (aspect < 1 ? 0.55 : 1))); });
+      const keepM = aspect >= 1 || Math.abs(u.nx) > 0.75 || Math.abs(u.ny) > 0.75; o.scale.setScalar(Math.max(0.001, cur.ct * u.s * (aspect < 1 ? (keepM ? 0.5 : 0.001) : 1))); });
   }
 
   // ambient
