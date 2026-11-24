@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Propuesta Like Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: clínica, sereno, seguro de sí; poco color y mucho aire
+   IDEA: el recorrido del paciente: de ver un post a sentarse en el sillón
+   PICTURE: un móvil con la app de reservas funcionando de verdad en la portada
+   COLOUR+TYPE: azul cobalto de la marca degradado a azul hielo, blanco esmalte, coral solo para lo destacado; Outfit ligera + Inter
+   LAYOUT: portada azul a sangre, bandas blancas, planes y calculadora como herramientas */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#061428);--ink:light-dark(#0b1b33,#e8f3fb);--muted:light-dark(#4f5f77,#9db3c8);
+--soft:light-dark(#eef7fc,#0b2140);--line:light-dark(#d6e6f1,#1b3558);--card:light-dark(#ffffff,#0a1d38);
+--blue:#0a4fb3;--blue2:light-dark(#0a4fb3,#5fb4f0);--ice:#a5dcf1;--coral:#ff7a66}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Outfit,Inter,sans-serif;font-weight:300;line-height:1.08;text-wrap:balance;margin:0}
+h2{font-size:clamp(32px,4.4vw,48px)}h3{font-size:22px;font-weight:500}
+p{margin:0}.muted{color:var(--muted)}
+.band{padding:clamp(48px,7vw,104px) max(5vw,16px)}.wrap{max-width:1180px;margin:0 auto}
+.lead{font-size:17px;color:var(--muted);max-width:62ch;margin-top:16px}
+.eyebrow{font-size:14px;color:var(--blue2);font-weight:600;margin-bottom:14px}
+.scroll{overflow-x:auto}html{scroll-padding-top:72px;scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:20px;padding:12px max(5vw,16px);max-width:none}
+.brand{font-family:Outfit;font-weight:500;font-size:18px;white-space:nowrap;color:var(--ink);text-decoration:none}
+.brand b{font-weight:600;color:var(--blue2)}
+.links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.links a{flex:none;color:var(--muted);text-decoration:none;font-size:14px;padding:8px 12px;border-radius:99px}
+.links a:hover{color:var(--ink);background:var(--soft)}
+@media(max-width:900px){nav{position:static}}
+/* hero */
+.hero{background:radial-gradient(120% 90% at 85% 10%,#cfeefb 0,#a5dcf1 18%,#3d97e2 48%,#0a4fb3 78%,#073a86 100%);color:#fff;padding:clamp(40px,6vw,88px) max(5vw,16px) clamp(56px,7vw,96px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,72px);align-items:center}
+.hero h1{font-size:clamp(40px,6vw,72px);font-weight:200}
+.hero h1 em{font-style:normal;font-weight:500}
+.hero .sub{font-size:18px;opacity:.92;max-width:50ch;margin-top:22px}
+.tag{display:inline-flex;align-items:center;gap:10px;font-size:14px;border:1px solid rgba(255,255,255,.45);border-radius:99px;padding:6px 14px 6px 6px;margin-bottom:26px}
+.tag span{background:#fff;color:#0a4fb3;border-radius:99px;padding:3px 10px;font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:99px;font:600 15px Inter;text-decoration:none;border:0;cursor:pointer;transition:transform .2s}
+.btn:hover{transform:translateY(-1px)}.btn:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.btn.w{background:#fff;color:#0a4fb3}.btn.o{border:1px solid rgba(255,255,255,.6);color:#fff;background:transparent}
+.btn.b{background:var(--blue);color:#fff}
+.facts{display:flex;flex-wrap:wrap;gap:28px;margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.3);font-size:14px}
+.facts b{display:block;font:300 26px Outfit}
+@media(max-width:860px){.hero .wrap{grid-template-columns:minmax(0,1fr)}}
+/* phone */
+.phone{width:min(330px,100%);margin:0 auto;aspect-ratio:9/18.5;background:#0b1b33;border-radius:44px;padding:11px;box-shadow:0 40px 80px -20px rgba(4,26,64,.6),inset 0 0 0 2px #2c4a74}
+.screen{height:100%;background:#fff;color:#0b1b33;border-radius:34px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+.ph-top{background:linear-gradient(135deg,#0a4fb3,#3d97e2);color:#fff;padding:30px 18px 16px}
+.ph-top small{opacity:.8;font-size:12px}.ph-top div{font:500 19px Outfit}
+.steps{display:flex;gap:5px;margin-top:12px}.steps i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.3)}.steps i.on{background:#fff}
+.ph-body{flex:1;overflow-y:auto;padding:14px;font-size:14px}
+.ph-body h4{margin:2px 0 10px;font:500 15px Outfit}
+.opt{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;border:1px solid #d6e6f1;background:#fff;color:#0b1b33;border-radius:14px;padding:11px 12px;margin-bottom:8px;font:500 14px Inter;cursor:pointer;min-height:44px}
+.opt small{white-space:nowrap;margin-left:8px;font-size:12px}
+.opt:hover,.opt.sel{border-color:#0a4fb3;background:#eef7fc}.opt small{color:#4f5f77;font-weight:400}
+.days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-bottom:12px}
+.day{border:1px solid #d6e6f1;border-radius:12px;padding:7px 0;text-align:center;background:#fff;color:#0b1b33;cursor:pointer;font:500 12px Inter;min-height:44px}
+.day b{display:block;font:500 17px Outfit}.day.sel{background:#0a4fb3;color:#fff;border-color:#0a4fb3}
+.hours{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.hr{border:1px solid #d6e6f1;border-radius:10px;padding:9px 0;background:#fff;color:#0b1b33;cursor:pointer;font:500 13px Inter;min-height:40px}
+.hr:disabled{opacity:.35;text-decoration:line-through;cursor:default}.hr.sel{background:#0a4fb3;color:#fff}
+.ph-body label{display:block;font-size:12px;color:#4f5f77;margin:8px 0 4px}
+.ph-body input{width:100%;font:16px Inter;padding:10px 12px;border:1px solid #d6e6f1;border-radius:12px;color:#0b1b33;background:#fff}
+.ph-foot{padding:12px 14px 16px;border-top:1px solid #eef2f6;display:flex;gap:8px}
+.ph-foot button{flex:1;min-height:44px;border-radius:99px;border:0;font:600 14px Inter;cursor:pointer}
+.go{background:#0a4fb3;color:#fff}.go:disabled{background:#b9cde6;cursor:default}.back{background:#eef2f6;color:#0b1b33;flex:0 0 44px!important}
+.ok{text-align:center;padding-top:8px}.ok .tick{width:56px;height:56px;border-radius:50%;background:#e4f4ff;color:#0a4fb3;display:grid;place-items:center;margin:0 auto 10px;font-size:26px}
+.wa{background:#e7f7ee;border-radius:14px 14px 14px 4px;padding:10px 12px;text-align:left;font-size:13px;margin-top:14px;color:#13331f}
+.wa small{display:block;color:#4b7a5d;font-size:11px;margin-bottom:3px}
+.demo-note{text-align:center;font-size:13px;opacity:.85;margin-top:14px}
+/* cards */
+.grid{display:grid;gap:18px;margin-top:40px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px}
+.find{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px}
+.find .ic{width:42px;height:42px;border-radius:12px;background:var(--soft);display:grid;place-items:center;color:var(--blue2)}
+.find .fix{margin-top:10px;font-size:15px;padding-top:10px;border-top:1px dashed var(--line)}
+.find .fix b{color:var(--blue2)}
+.soft{background:var(--soft)}
+@media(max-width:600px){.find{grid-template-columns:minmax(0,1fr)}.card{padding:22px}}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:44px;position:relative}
+.stage{padding:28px;border-top:2px solid var(--blue2);position:relative}
+.stage .n{font:300 54px Outfit;color:var(--blue2);line-height:1}
+.stage h3{margin:10px 0 8px}.stage ul{margin:14px 0 0;padding-left:18px;color:var(--muted);font-size:15px}
+.stage:not(:last-child)::after{content:"";position:absolute;right:-7px;top:-8px;width:14px;height:14px;border-top:2px solid var(--blue2);border-right:2px solid var(--blue2);transform:rotate(45deg);background:var(--soft)}
+@media(max-width:760px){.flow{grid-template-columns:minmax(0,1fr)}.stage:not(:last-child)::after{display:none}}
+/* app */
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:2px;margin-top:36px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.feat div{background:var(--card);padding:24px}.feat h3{font-size:18px;margin-bottom:6px}.feat p{font-size:15px;color:var(--muted)}
+.price-app{display:flex;flex-wrap:wrap;gap:28px;align-items:end;margin-top:28px;padding:26px;border-radius:22px;background:linear-gradient(120deg,#0a4fb3,#3d97e2);color:#fff}
+.price-app b{font:300 40px Outfit;white-space:nowrap}.price-app small{display:block;opacity:.85;font-size:14px}
+/* content */
+.mix{display:flex;height:58px;border-radius:14px;overflow:hidden;margin-top:24px}
+.mix div{display:flex;align-items:center;padding:0 14px;color:#fff;font-weight:600;font-size:14px;white-space:nowrap}
+.legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:14px;font-size:14px;color:var(--muted)}
+@media(max-width:600px){.legend{grid-template-columns:minmax(0,1fr)}.mix div span{display:none}}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.tab{min-height:44px;padding:0 18px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:500 15px Inter;cursor:pointer}
+.tab.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.pane{margin-top:18px;padding:26px;border-radius:22px;background:var(--card);border:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+@media(max-width:700px){.pane{grid-template-columns:minmax(0,1fr)}}
+.pane h4{margin:0 0 6px;font:500 15px Inter;color:var(--blue2)}
+/* plans */
+.toggle{display:flex;align-items:center;gap:14px;margin-top:28px;padding:16px 20px;border-radius:18px;background:var(--soft);flex-wrap:wrap}
+.sw{position:relative;width:54px;height:30px;flex:none}.sw input{opacity:0;position:absolute;inset:0;margin:0;cursor:pointer;z-index:1}
+.sw span{position:absolute;inset:0;border-radius:99px;background:#b9c9da;transition:.2s}.sw span::after{content:"";position:absolute;width:24px;height:24px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.2s}
+.sw input:checked+span{background:var(--blue)}.sw input:checked+span::after{transform:translateX(24px)}
+.sw input:focus-visible+span{outline:3px solid var(--coral);outline-offset:2px}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:24px;align-items:stretch}
+@media(max-width:940px){.plans{grid-template-columns:minmax(0,1fr)}}
+.plan{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:26px;padding:28px;background:var(--card);position:relative}
+.plan.rec{border:2px solid var(--blue2);box-shadow:0 30px 60px -30px rgba(10,79,179,.45)}
+.badge{position:absolute;top:-13px;left:28px;background:var(--coral);color:#fff;font:600 13px Inter;padding:4px 12px;border-radius:99px}
+.plan .for{font-size:15px;color:var(--muted);margin-top:6px;min-height:48px}
+.amt{font:300 48px Outfit;margin-top:18px;white-space:nowrap}.amt small{font:400 15px Inter;color:var(--muted)}
+.setup{font-size:14px;color:var(--muted);min-height:22px}
+.plan ul{list-style:none;padding:0;margin:20px 0 24px;font-size:15px;flex:1}
+.plan li{padding:8px 0 8px 26px;border-top:1px solid var(--line);position:relative}
+.plan li::before{content:"";position:absolute;left:2px;top:15px;width:12px;height:7px;border-left:2px solid var(--blue2);border-bottom:2px solid var(--blue2);transform:rotate(-45deg)}
+.plan li.app{color:var(--blue2);font-weight:500}
+.plan .btn{width:100%}.plan .btn.line{background:transparent;border:1px solid var(--blue2);color:var(--blue2)}
+.plan.chosen{outline:3px solid var(--coral);outline-offset:3px}
+.fine{font-size:13px;color:var(--muted);margin-top:16px}
+/* calc */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);margin-top:36px;align-items:center}
+@media(max-width:820px){.calc{grid-template-columns:minmax(0,1fr)}}
+.rng{margin-bottom:22px}.rng .top{display:flex;justify-content:space-between;gap:12px;font-size:15px}.rng output{font-weight:600;white-space:nowrap}
+input[type=range]{width:100%;accent-color:var(--blue);height:32px}
+select{font:16px Inter;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);width:100%;min-height:44px}
+.result{background:var(--blue);color:#fff;border-radius:28px;padding:clamp(24px,4vw,40px);background:radial-gradient(120% 120% at 100% 0,#3d97e2,#0a4fb3 60%,#073a86)}
+.result .big{font:200 clamp(56px,9vw,96px) Outfit;line-height:1;white-space:nowrap}
+.rows{margin-top:24px;border-top:1px solid rgba(255,255,255,.3)}
+.rows div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.2);font-size:15px}.rows b{white-space:nowrap}
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:40px}
+@media(max-width:820px){.road{grid-template-columns:minmax(0,1fr)}}
+.road .card h3{margin:8px 0 12px}.road ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px}
+.when{font:500 14px Inter;color:var(--blue2)}
+table{width:100%;border-collapse:collapse;margin-top:32px;font-size:15px}
+th{text-align:left;font-weight:600;color:var(--muted);font-size:14px;padding:12px;border-bottom:2px solid var(--line)}
+td{padding:16px 12px;border-bottom:1px solid var(--line);vertical-align:top}td:first-child{font-weight:600}
+/* close */
+.close{background:linear-gradient(160deg,#0a4fb3,#073a86);color:#fff;text-align:center}
+.close h2{font-size:clamp(34px,5vw,56px);font-weight:200;max-width:18ch;margin:0 auto}
+.offer{display:inline-block;margin:28px auto 0;padding:18px 24px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);max-width:640px;font-size:16px}
+.close .cta{justify-content:center}
+
+/* redes */
+.ig-switch{display:none}
+.ig-wrap{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:clamp(16px,3vw,40px);margin-top:44px;align-items:start}
+.vs{align-self:center;font:200 40px Outfit;color:var(--muted)}
+.ig-col h3{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:20px}
+.ig-col h3 i{font-style:normal;font:600 12px Inter;padding:4px 10px;border-radius:99px}
+.ig-col.old h3 i{background:#f3e3e0;color:#a33b2b}.ig-col.new h3 i{background:#dff0fb;color:#0a4fb3}
+.ig{background:#fff;color:#111;border-radius:28px;border:1px solid var(--line);overflow:hidden;box-shadow:0 30px 60px -36px rgba(4,26,64,.45);max-width:460px;margin:0 auto}
+.ig-head{display:flex;align-items:center;gap:14px;padding:18px 16px 10px}
+.av{width:64px;height:64px;border-radius:50%;flex:none;display:grid;place-items:center;font:600 13px Outfit}
+.old .av{background:#e6e6e6;color:#777;border:3px solid #ddd}
+.new .av{background:#0a4fb3;color:#fff;border:3px solid #fff;box-shadow:0 0 0 2px #a5dcf1}
+.ig-name{font:600 15px Inter}.ig-cat{font-size:12px;color:#737373}
+.ig-bio{padding:0 16px;font-size:13px;line-height:1.45}
+.ig-bio a{color:#00376b;text-decoration:none;font-weight:500}
+.ig-btns{display:flex;gap:6px;padding:12px 16px}
+.ig-btns span{flex:1;text-align:center;font:600 13px Inter;padding:8px 0;border-radius:9px;background:#efefef}
+.new .ig-btns span.pri{background:#0a4fb3;color:#fff}
+.hl{display:flex;gap:12px;padding:4px 16px 14px;overflow:hidden}
+.hl div{flex:none;width:56px;text-align:center;font-size:11px;color:#333}
+.hl b{display:block;width:52px;height:52px;border-radius:50%;margin:0 auto 4px;border:1px solid #ddd}
+.new .hl b{background:radial-gradient(circle at 50% 45%,#fff 0 30%,#a5dcf1 31% 100%);border:2px solid #0a4fb3}
+.ig-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;border-top:1px solid #eee}
+.tile{position:relative;aspect-ratio:4/5;overflow:hidden;border:0;padding:0;cursor:pointer;display:block;width:100%;background:#ddd}
+.tile>svg{position:absolute;inset:0;width:100%;height:100%}
+.tile.sel::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 3px var(--coral)}
+.tile .ico{position:absolute;top:6px;right:6px;width:16px;height:16px}
+.ig-note{margin:14px auto 0;max-width:460px;min-height:92px;padding:16px 18px;border-radius:18px;font-size:15px;border:1px solid var(--line);background:var(--card)}
+.ig-note b{display:block;margin-bottom:2px}
+.old .ig-note b{color:#c2412f}.new .ig-note b{color:var(--blue2)}
+.recre{font-size:13px;color:var(--muted);text-align:center;margin-top:10px}
+.cmp{margin-top:56px}
+.cmp td:nth-child(2){color:var(--muted)}.cmp td:nth-child(3){font-weight:500}
+@media(max-width:860px){.ig-wrap{grid-template-columns:minmax(0,1fr)}.vs{display:none}
+.ig-switch{display:flex;gap:6px;margin-top:28px;padding:5px;background:var(--soft);border-radius:99px;max-width:460px;margin-inline:auto}
+.ig-switch button{flex:1;min-height:44px;border:0;border-radius:99px;background:transparent;color:var(--ink);font:600 14px Inter;cursor:pointer}
+.ig-switch button.on{background:var(--card);box-shadow:0 4px 14px -6px rgba(4,26,64,.35);color:var(--blue2)}
+.ig-wrap{margin-top:18px}.ig-wrap[data-v=old] .ig-col.new,.ig-wrap[data-v=new] .ig-col.old{display:none}}
+/* móvil */
+.snapnav{display:none}
+.mbar{display:none}
+@media(max-width:700px){
+nav{position:sticky}
+nav .wrap{flex-wrap:wrap;gap:4px;padding:10px 16px 6px}
+.links{margin-left:-12px;width:calc(100% + 24px);padding:0 12px}
+.links a{padding:8px 10px;font-size:13px}
+.band{padding:52px 18px}
+.hero{padding:32px 18px 48px}
+.hero h1{font-size:clamp(36px,10.5vw,46px)}
+.hero .sub{font-size:16px;margin-top:16px}
+.tag{font-size:13px;margin-bottom:20px}
+.cta .btn{flex:1 1 100%}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:28px;font-size:12px}
+.facts b{font-size:21px}
+.phone{width:min(300px,86%)}
+.lead{font-size:16px}
+.grid{margin-top:28px}
+.snap{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin-inline:-18px;padding:18px 18px 6px;scrollbar-width:none;align-items:stretch}
+.snap::-webkit-scrollbar{display:none}
+.snap>*{flex:0 0 86%;scroll-snap-align:center}
+.snapnav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px}
+.snapnav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:20px;cursor:pointer}
+.snapnav span{font-size:14px;color:var(--muted);min-width:52px;text-align:center}
+.feat{grid-template-columns:repeat(2,minmax(0,1fr))}
+.feat div{padding:16px}.feat h3{font-size:15px}.feat p{font-size:13px}
+.price-app{padding:22px;gap:16px}.price-app b{font-size:32px}
+.stage{padding:22px 4px}.stage .n{font-size:42px}
+.plan{padding:24px 22px}.amt{font-size:42px}.plan .for{min-height:0}
+.toggle{padding:14px 16px;flex-wrap:nowrap}
+.calc{gap:24px}.result{order:-1;position:sticky;top:84px;z-index:5;padding:20px 22px;border-radius:22px}
+.result .big{font-size:44px}.rows{margin-top:8px}.rows div{padding:5px 0;font-size:13px}.rows div:nth-child(4){display:none}
+.result>p{display:none}
+.close .cta .btn{flex:1 1 100%}
+.offer{font-size:15px;padding:16px 18px}
+h2{font-size:clamp(28px,8.4vw,36px)}
+.mbar{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:30;gap:8px;padding:8px;border-radius:99px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 14px 40px -12px rgba(4,26,64,.4);transform:translateY(140%);transition:transform .3s}
+.mbar.show{transform:none}
+.mbar .btn{flex:1;min-height:44px;font-size:14px;padding:0 12px}
+footer{padding-bottom:96px}
+}
+footer{padding:28px max(5vw,16px);font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;white-space:normal;color:var(--muted);font-weight:400}.stack td:empty{display:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<nav><div class="wrap"><a class="brand" href="#inicio">like <b>dental</b> · propuesta</a>
+<div class="links"><a href="#diagnostico">Diagnóstico</a><a href="#redes">Redes</a><a href="#estrategia">Estrategia</a><a href="#app">App de reservas</a><a href="#contenido">Contenido</a><a href="#planes">Planes</a><a href="#retorno">Retorno</a><a href="#hoja-de-ruta">Hoja de ruta</a></div></div></nav>
+
+<header class="hero" id="inicio"><div class="wrap">
+<div>
+<div class="tag"><span>2026</span>Propuesta actualizada para Clínica Like Dental</div>
+<h1>Que te descubran en Instagram y <em>reserven solos</em>, a cualquier hora.</h1>
+<p class="sub">Un sistema completo para Like Dental en Villanueva del Pardillo: contenido que genera confianza, anuncios que atraen pacientes de la zona y una app de reservas que convierte cada visita en una cita en la agenda.</p>
+<div class="cta"><a class="btn w" href="#planes">Ver planes e inversión</a><a class="btn o" href="#app">Cómo funciona la app</a></div>
+<div class="facts"><div><b>24/7</b>reservas online</div><div><b>3 pasos</b>de un post a una cita</div><div><b>90 días</b>para tenerlo en marcha</div></div>
+</div>
+<div>
+<div class="phone"><div class="screen" id="ph"></div></div>
+<p class="demo-note">Pruébala: es una demostración interactiva. No envía datos.</p>
+</div>
+</div></header>
+
+<section class="band soft" id="diagnostico"><div class="wrap">
+<div class="eyebrow">Lo que hemos visto</div>
+<h2>Like Dental ya tiene la base. Lo que falla es el paso de “me interesa” a “tengo cita”.</h2>
+<p class="lead">Hemos revisado clinicalikedental.com como lo haría un paciente nuevo. Estos son los puntos donde hoy se pierden citas y cómo los resolvemos.</p>
+<div class="grid g2 snap" id="finds"></div>
+</div></section>
+
+<section class="band" id="redes"><div class="wrap">
+<div class="eyebrow">Redes sociales</div>
+<h2>Un feed que informa no llena la agenda. Un feed que vende, sí.</h2>
+<p class="lead">El paciente revisa el Instagram de una clínica antes de reservar: mira la higiene, las instalaciones, al equipo y los resultados. Así cambia el perfil de Like Dental con la estrategia. Toca cualquier publicación para ver por qué funciona o por qué no.</p>
+<div class="ig-switch" id="igSw" role="tablist"><button class="on" data-v="old" role="tab">Feed actual</button><button data-v="new" role="tab">Feed que vende</button></div>
+<div class="ig-wrap" id="igWrap" data-v="old">
+<div class="ig-col old"><h3>Feed actual <i>Anticuado</i></h3><div class="ig" id="igOld"></div><div class="ig-note" id="noteOld"></div><p class="recre">Recreación orientativa de un feed sin estrategia.</p></div>
+<div class="vs">vs</div>
+<div class="ig-col new"><h3>Feed que vende <i>Like Dental 2026</i></h3><div class="ig" id="igNew"></div><div class="ig-note" id="noteNew"></div><p class="recre">Propuesta de diseño. Las fotos serán del equipo y la clínica reales.</p></div>
+</div>
+<table class="stack cmp"><thead><tr><th>Aspecto</th><th>Feed actual</th><th>Feed que vende</th></tr></thead><tbody id="cmpRows"></tbody></table>
+</div></section>
+
+<section class="band soft" id="estrategia"><div class="wrap">
+<div class="eyebrow">La estrategia</div>
+<h2>Atraer, convertir y fidelizar: un solo sistema, no tres servicios sueltos.</h2>
+<p class="lead">Las redes generan confianza y deseo. La app convierte ese interés en una cita sin esperar a que alguien conteste al teléfono. Los recordatorios y las reseñas hacen que el paciente vuelva y traiga a otros.</p>
+<div class="flow" id="flow"></div>
+</div></section>
+
+<section class="band" id="app"><div class="wrap">
+<div class="eyebrow">Novedad en esta propuesta</div>
+<h2>App de reservas automáticas, con la imagen de Like Dental.</h2>
+<p class="lead">Hoy la web solo ofrece un formulario y la clínica atiende de lunes a viernes de 9:00 a 21:00. Con la app, el paciente reserva por la noche, en fin de semana o desde Instagram, y recepción se encuentra la cita ya en la agenda.</p>
+<div class="feat" id="feat"></div>
+</div></section>
+
+<section class="band soft" id="contenido"><div class="wrap">
+<div class="eyebrow">Estrategia de contenido</div>
+<h2>Contenido que enseña, demuestra resultados y pone cara al equipo.</h2>
+<p class="lead">El paciente dental decide por confianza. Por eso el contenido gira en torno a cuatro pilares y a los tratamientos de mayor valor: estética, ortodoncia e implantes.</p>
+<div class="mix" aria-label="Reparto de formatos"><div style="flex:50;background:#0a4fb3">50%<span>&nbsp;Reels</span></div><div style="flex:30;background:#3d97e2">30%<span>&nbsp;Carruseles</span></div><div style="flex:20;background:#7cc3ea;color:#073a86">20%<span>&nbsp;Fotos</span></div></div>
+<div class="legend"><p><b style="color:var(--ink)">Reels:</b> el formato que más alcance orgánico consigue entre personas nuevas.</p><p><b style="color:var(--ink)">Carruseles:</b> educan y se guardan, una señal muy valorada por el algoritmo.</p><p><b style="color:var(--ink)">Fotos:</b> presentan al equipo y mantienen el perfil limpio y profesional.</p></div>
+<div class="grid g3" id="pillars" style="margin-top:28px"></div>
+<h3 style="margin-top:56px;font-size:28px;font-weight:300">A quién nos dirigimos</h3>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div class="pane" id="pane" role="tabpanel"></div>
+</div></section>
+
+<section class="band" id="planes"><div class="wrap">
+<div class="eyebrow">Planes e inversión</div>
+<h2>Tres planes claros. Elegid hasta dónde queréis llegar.</h2>
+<p class="lead">Hemos simplificado la propuesta anterior en tres niveles. Cada uno incluye la producción en la clínica, el diseño, los textos y la publicación; nadie del equipo tiene que preocuparse de las redes.</p>
+<div class="toggle"><label class="sw"><input type="checkbox" id="withApp" checked aria-label="Incluir app de reservas"><span></span></label><div><b>Incluir app de reservas automáticas</b><div class="muted" style="font-size:14px">Se suman 39 €/mes y la implantación según el plan.</div></div></div>
+<div class="plans snap" id="plans"></div>
+<p class="fine">Precios sin IVA. La inversión en anuncios de Meta del plan Profesional se paga aparte, directamente a Meta, y la decidís vosotros (recomendado: desde 300 €/mes). Sin permanencia a partir del tercer mes.</p>
+</div></section>
+
+<section class="band soft" id="retorno"><div class="wrap">
+<div class="eyebrow">Calculadora de retorno</div>
+<h2>¿Cuántos pacientes nuevos hacen falta para que salga rentable?</h2>
+<p class="lead">Moved los controles con vuestras propias cifras. Es una estimación orientativa, no una promesa: sirve para ver a partir de qué punto la inversión se paga sola.</p>
+<div class="calc">
+<div>
+<div class="rng"><label for="cPlan">Plan</label><select id="cPlan"></select></div>
+<div class="rng"><div class="top"><label for="cNew">Pacientes nuevos al mes gracias a redes y app</label><output id="oNew"></output></div><input type="range" id="cNew" min="1" max="30" value="5"></div>
+<div class="rng"><div class="top"><label for="cTicket">Valor medio del primer tratamiento</label><output id="oTicket"></output></div><input type="range" id="cTicket" min="60" max="2500" step="10" value="400"></div>
+<div class="rng"><div class="top"><label for="cNoshow">Citas recuperadas al mes con recordatorios</label><output id="oNoshow"></output></div><input type="range" id="cNoshow" min="0" max="25" value="4"></div>
+<div class="rng"><div class="top"><label for="cVisit">Valor medio de una cita</label><output id="oVisit"></output></div><input type="range" id="cVisit" min="30" max="300" step="5" value="60"></div>
+</div>
+<div class="result" aria-live="polite">
+<div style="font-size:15px;opacity:.9">Retorno estimado por cada euro invertido</div>
+<div class="big" id="rX">0×</div>
+<div class="rows" id="rRows"></div>
+<p style="font-size:13px;opacity:.8;margin-top:14px">La implantación de la app se reparte en 12 meses. No incluye la inversión publicitaria en Meta.</p>
+</div>
+</div>
+</div></section>
+
+<section class="band" id="hoja-de-ruta"><div class="wrap">
+<div class="eyebrow">Hoja de ruta</div>
+<h2>Los primeros 90 días, paso a paso.</h2>
+<div class="road snap" id="road"></div>
+<h3 style="margin-top:64px;font-size:28px;font-weight:300">Cómo mediremos el éxito</h3>
+<table class="stack"><thead><tr><th>Resultado</th><th>Qué significa para la clínica</th><th>Indicador</th></tr></thead><tbody id="kpi"></tbody></table>
+</div></section>
+
+<section class="band close"><div class="wrap">
+<h2>Hagamos de Like Dental la clínica más “likeada” y visitada de la zona.</h2>
+<div class="offer"><b>Condición especial hasta el 31 de diciembre de 2026:</b> si empezáis con el plan Crecimiento o Profesional antes de esa fecha, el primer mes de mantenimiento de la app es gratis y os entregamos la app lista para enero.</div>
+<div class="cta" style="margin-top:32px"><a class="btn w" href="https://wa.me/34711236285?text=Hola%2C%20hemos%20visto%20la%20propuesta%20para%20Like%20Dental" target="_blank" rel="noopener">Hablemos por WhatsApp</a><a class="btn o" href="#planes">Volver a los planes</a></div>
+<p style="margin-top:18px;opacity:.85;font-size:15px">WhatsApp: +34 711 236 285 · Nohely Engono, marketing y desarrollo digital</p>
+</div></section>
+<div class="mbar" id="mbar"><a class="btn b" href="#planes">Ver planes</a><a class="btn line" style="border:1px solid var(--blue2);color:var(--blue2)" href="https://wa.me/34711236285?text=Hola%2C%20hemos%20visto%20la%20propuesta%20para%20Like%20Dental" target="_blank" rel="noopener">WhatsApp</a></div>
+<footer><span>Propuesta preparada para Clínica Like Dental · Villanueva del Pardillo (Madrid)</span><span>Noviembre 2026 · Sustituye a la propuesta del 17/03/2026</span></footer>
+
+<script>{
+const $=s=>document.querySelector(s);
+const eur=n=>new Intl.NumberFormat('es-ES',{maximumFractionDigits:0}).format(Math.round(n))+' €';
+const svg=d=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+
+/* diagnóstico */
+const finds=[
+['<rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/>','No se puede reservar online','La web solo tiene un formulario “Pide ya tu cita” y no indica cuándo se responderá. Quien busca dentista a las 22:00 o en fin de semana se va a otra clínica.','<b>Solución:</b> app de reservas 24/7 enlazada desde la web, Instagram y Google.'],
+['<path d="M21 12a8 8 0 0 1-11.7 7.1L4 20l1-5A8 8 0 1 1 21 12z"/>','Falta un canal directo','No aparece WhatsApp en la web, que es el canal que más usan los pacientes para preguntar precios y citas.','<b>Solución:</b> botón de WhatsApp en la web y llamadas a la acción en el 80% de las publicaciones y stories.'],
+['<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>','La prueba social no se ve','La sección “¿Qué opinan nuestros clientes?” aparece vacía, y la cifra de “100% clientes satisfechos” no tiene nada visible que la respalde.','<b>Solución:</b> testimonios en vídeo de pacientes reales (con su consentimiento) y reseñas de Google integradas.'],
+['<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><circle cx="17.5" cy="9" r="2.5"/><path d="M17 14.6c2.3.3 3.9 2 4.5 4.9"/>','El equipo no tiene cara','La web destaca que siempre atienden los mismos profesionales, pero no presenta a ninguno por su nombre ni con foto.','<b>Solución:</b> retratos profesionales y vídeos cortos del equipo; es lo que más confianza genera.'],
+['<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>','Detalles que restan imagen','El aviso de cookies muestra textos sin rellenar como “{title}”, el pie tiene un bloque de dirección vacío y un enlace no lleva a ninguna página.','<b>Solución:</b> revisión técnica incluida al instalar la app; son arreglos rápidos.'],
+['<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>','Tratamientos sin contexto','Las descripciones de los tratamientos son genéricas y apenas explican el proceso, la duración o la financiación disponible.','<b>Solución:</b> carruseles educativos por tratamiento que también se enlazan desde la web.']];
+$('#finds').innerHTML=finds.map(f=>`<div class="card find"><div class="ic">${svg(f[0])}</div><div><h3>${f[1]}</h3><p class="muted" style="margin-top:8px;font-size:15px">${f[2]}</p><p class="fix">${f[3]}</p></div></div>`).join('');
+
+/* flow */
+const flow=[['Atraer','Que la zona os conozca',['Reels y carruseles con los tratamientos de más valor','Anuncios en Meta segmentados por zona (plan Profesional)','Perfil optimizado: biografía, destacados y enlace de reserva']],
+['Convertir','Que reservar sea inmediato',['App de reservas en la web, Instagram y Google','WhatsApp para dudas sobre precios y financiación','Respuesta activa a comentarios y mensajes']],
+['Fidelizar','Que vuelvan y os recomienden',['Recordatorios automáticos antes de cada cita','Petición de reseña en Google después de la visita','Contenido para familias: revisiones y odontopediatría']]];
+$('#flow').innerHTML=flow.map((s,i)=>`<div class="stage"><div class="n">${i+1}</div><h3>${s[0]}</h3><p class="muted">${s[1]}</p><ul>${s[2].map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('');
+
+/* features */
+const feat=[['Reserva en 3 pasos','Tratamiento, día y hora. Sin llamadas, sin esperas y desde el móvil.'],['Abierta las 24 horas','Las citas entran también por la noche y en fin de semana.'],['Recordatorios automáticos','Aviso 24 horas antes por WhatsApp o email para confirmar, cambiar o cancelar.'],['Huecos que se recuperan','Si alguien cancela, el hueco vuelve a quedar libre al momento.'],['Panel para recepción','Agenda clara por profesional, con bloqueo de horas, festivos y vacaciones.'],['Urgencias y primeras visitas','Huecos reservados para urgencias y valoraciones gratuitas.'],['Con vuestra imagen','Colores, logo y textos de Like Dental. Se enlaza desde la web, la bio de Instagram y la ficha de Google.'],['Datos protegidos','Diseñada para cumplir el RGPD, con consentimiento explícito y acceso solo para la clínica.']];
+$('#feat').innerHTML=feat.map(f=>`<div><h3>${f[0]}</h3><p>${f[1]}</p></div>`).join('');
+
+/* pillars + audiences */
+const pil=[['Educación dental','Consejos y prevención cada semana. Carruseles de 5 láminas con diseño limpio.'],['Antes y después','Resultados reales en pantalla dividida o con transición de “revelación”.'],['El equipo','Retratos profesionales en el feed y vídeos cercanos en stories.'],['Testimonios','Vídeos verticales de 15 segundos de pacientes satisfechos.']];
+$('#pillars').innerHTML=pil.map(p=>`<div class="card"><h3>${p[0]}</h3><p class="muted" style="margin-top:8px;font-size:15px">${p[1]}</p></div>`).join('');
+const aud=[['Familias de la zona','Padres y madres de 30 a 50 años que viven en Villanueva del Pardillo y buscan una clínica “para toda la vida”: cercanía, confianza y comodidad.','Odontopediatría, revisiones familiares, la tarjeta propia de la clínica y el parking gratuito.','Es el público más fiel y rentable a largo plazo.'],
+['Adultos activos','Profesionales de 25 a 55 años que trabajan o teletrabajan en la zona. Valoran la puntualidad, la tecnología y su tiempo.','Estética dental, ortodoncia invisible, implantes y financiación. Para ellos, poder reservar online a cualquier hora es decisivo.','Tienen el mayor valor por tratamiento.'],
+['Urgencias','Personas de cualquier edad sin dentista de cabecera, con dolor o un accidente dental, que necesitan solución inmediata.','Contenido y anuncios de “urgencias en Villanueva del Pardillo” con huecos de urgencia reservables en la app.','Una urgencia bien atendida suele convertirse en paciente habitual.']];
+let at=0;const drawAud=()=>{$('#tabs').innerHTML=aud.map((a,i)=>`<button class="tab${i===at?' on':''}" role="tab" aria-selected="${i===at}" data-i="${i}">${a[0]}</button>`).join('');const a=aud[at];$('#pane').innerHTML=`<div><h4>Quiénes son</h4><p>${a[1]}</p><p class="muted" style="margin-top:12px;font-size:15px">${a[3]}</p></div><div><h4>Qué les mostramos</h4><p>${a[2]}</p></div>`};
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b){at=+b.dataset.i;drawAud()}});drawAud();
+
+/* plans */
+const APP_M=39,APP_SET=890;
+const plans=[{n:'Esencial',p:290,set:APP_SET,for:'Para profesionalizar la imagen y publicar con constancia.',f:['1 sesión mensual de fotos y vídeo en la clínica','8 publicaciones al mes (2 Reels)','Guiones, textos, diseño y programación','Optimización del perfil: bio, destacados y enlaces','Informe mensual de resultados']},
+{n:'Crecimiento',p:490,set:APP_SET/2,rec:1,for:'Para ganar visibilidad en la zona y empezar a llenar la agenda.',f:['2 sesiones mensuales en la clínica','12 publicaciones al mes (4 Reels, uno por semana)','Stories semanales y edición avanzada de vídeo','Gestión de comentarios y mensajes directos','Planificación temática (ej. mes de la ortodoncia)','Informe mensual y reunión de seguimiento']},
+{n:'Profesional',p:790,set:0,for:'Para liderar la zona con captación constante de pacientes.',f:['2 o 3 sesiones mensuales, con testimonios y casos clínicos','16 publicaciones al mes (6 a 8 Reels)','Creación y gestión de anuncios en Meta','Optimización de la ficha de Google y reseñas','Respuesta prioritaria a mensajes','Estrategia 360° y análisis de la competencia']}];
+let chosen=1;
+const drawPlans=()=>{const w=$('#withApp').checked;$('#plans').innerHTML=plans.map((p,i)=>{const m=p.p+(w?APP_M:0);const s=!w?'':p.set===0?'Implantación de la app incluida':'+ '+eur(p.set)+' de implantación (pago único)';return `<div class="plan${p.rec?' rec':''}${i===chosen?' chosen':''}">${p.rec?'<span class="badge">Recomendado</span>':''}<h3>${p.n}</h3><p class="for">${p.for}</p><div class="amt">${eur(m)}<small> /mes</small></div><div class="setup">${s}</div><ul>${w?'<li class="app">App de reservas automáticas</li>':''}${p.f.map(x=>`<li>${x}</li>`).join('')}</ul><button class="btn ${i===chosen?'b':'line'}" data-i="${i}">${i===chosen?'Plan seleccionado':'Elegir '+p.n}</button></div>`}).join('')};
+$('#plans').addEventListener('click',e=>{const b=e.target.closest('button[data-i]');if(b){chosen=+b.dataset.i;$('#cPlan').value=chosen;drawPlans();calc()}});
+$('#withApp').addEventListener('change',()=>{drawPlans();calc()});
+
+/* calculator */
+$('#cPlan').innerHTML=plans.map((p,i)=>`<option value="${i}">${p.n} · ${eur(p.p)}/mes</option>`).join('');$('#cPlan').value=chosen;
+const calc=()=>{const p=plans[+$('#cPlan').value],w=$('#withApp').checked;const n=+$('#cNew').value,t=+$('#cTicket').value,ns=w?+$('#cNoshow').value:0,v=+$('#cVisit').value;
+$('#oNew').textContent=n;$('#oTicket').textContent=eur(t);$('#oNoshow').textContent=w?$('#cNoshow').value:'Sin app';$('#oVisit').textContent=eur(v);
+const inc=n*t+ns*v,cost=p.p+(w?APP_M+p.set/12:0),x=inc/cost,be=Math.ceil(Math.max(0,cost-ns*v)/t);
+$('#rX').textContent=(x>=10?Math.round(x):x.toFixed(1)).toString().replace('.',',')+'×';
+$('#rRows').innerHTML=[['Ingresos estimados al mes',eur(inc)],['Inversión mensual',eur(cost)],['Beneficio estimado',eur(inc-cost)],['Pacientes nuevos para cubrir la inversión',be+' al mes']].map(r=>`<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join('')};
+['#cNew','#cTicket','#cNoshow','#cVisit','#cPlan'].forEach(s=>$(s).addEventListener('input',()=>{if(s==='#cPlan'){chosen=+$('#cPlan').value;drawPlans()}calc()}));
+drawPlans();calc();
+
+/* roadmap + kpi */
+const road=[['Mes 1','Puesta a punto',['Auditoría y optimización de Instagram, Google y la web','Diseño e instalación de la app de reservas','Primera sesión de fotos y vídeo con el equipo','Calendario de contenidos del primer mes']],
+['Mes 2','Despegue',['Publicación constante según el plan','Enlace de reserva en la bio, stories y Google','Recordatorios automáticos en marcha','Primeros testimonios grabados']],
+['Mes 3','Optimización',['Análisis de qué contenido trae más citas','Ajuste de horarios y huecos según la demanda','Campañas por tratamiento (ej. ortodoncia)','Informe de 90 días y siguientes pasos']]];
+$('#road').innerHTML=road.map(r=>`<div class="card"><div class="when">${r[0]}</div><h3>${r[1]}</h3><ul>${r[2].map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('');
+const kpi=[['Más visibilidad','Like Dental aparece en el feed de miles de personas de Villanueva del Pardillo y alrededores sin que lo busquen.','Alcance e impresiones mensuales; 60% de la audiencia en la zona'],
+['Más consultas','El interés se convierte en acción: mensajes sobre precios, financiación y citas.','Clics en WhatsApp, mensajes directos y visitas a la app'],
+['Más citas online','Las reservas llegan solas, también fuera del horario de la clínica.','Reservas desde la app y porcentaje fuera de horario'],
+['Menos huecos vacíos','Los recordatorios reducen las citas olvidadas y los huecos cancelados se vuelven a ocupar.','Citas confirmadas frente a no presentadas'],
+['Más pacientes nuevos','Personas que llegan a la clínica diciendo que os vieron en redes.','Pacientes nuevos atribuidos a redes y app']];
+$('#kpi').innerHTML=kpi.map(k=>`<tr><td>${k[0]}</td><td>${k[1]}</td><td>${k[2]}</td></tr>`).join('');
+
+/* booking demo */
+const tr=[['Primera visita y revisión','Gratuita · 30 min'],['Limpieza dental','45 min'],['Valoración de ortodoncia','30 min'],['Valoración de implantes','30 min'],['Estética y blanqueamiento','30 min'],['Urgencia dental','Lo antes posible']];
+const dn=['dom','lun','mar','mié','jue','vie','sáb'];
+const days=[];{const d=new Date();d.setDate(d.getDate()+1);while(days.length<5){if(d.getDay()>0&&d.getDay()<6)days.push(new Date(d));d.setDate(d.getDate()+1)}}
+const hours=[];for(let h=9;h<21;h++)for(const m of['00','30'])hours.push(h+':'+m);
+const st={s:0,t:null,d:null,h:null,name:'',tel:''};
+const taken=(di,hi)=>((di*7+hi*5)%9)<3;
+const fmtD=d=>dn[d.getDay()]+' '+d.getDate()+' '+['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'][d.getMonth()];
+const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ph=$('#ph');
+const draw=()=>{const s=st.s;let body='',can=false;
+if(s===0){body='<h4>¿Qué necesitas?</h4>'+tr.map((t,i)=>`<button class="opt${st.t===i?' sel':''}" data-t="${i}"><span>${t[0]}</span><small>${t[1]}</small></button>`).join('');can=st.t!==null}
+if(s===1){body='<h4>Elige día y hora</h4><div class="days">'+days.map((d,i)=>`<button class="day${st.d===i?' sel':''}" data-d="${i}">${dn[d.getDay()]}<b>${d.getDate()}</b></button>`).join('')+'</div>'+(st.d===null?'<p style="color:#4f5f77;font-size:13px">Selecciona un día para ver los huecos libres.</p>':'<div class="hours">'+hours.map((h,i)=>`<button class="hr${st.h===i?' sel':''}" data-h="${i}"${taken(st.d,i)?' disabled':''}>${h}</button>`).join('')+'</div>');can=st.h!==null}
+if(s===2){body=`<h4>Tus datos</h4><p style="font-size:13px;color:#4f5f77">${tr[st.t][0]} · ${fmtD(days[st.d])} · ${hours[st.h]}</p><label for="bn">Nombre</label><input id="bn" value="${esc(st.name)}" autocomplete="off" placeholder="Ana García"><label for="bt">Móvil</label><input id="bt" value="${esc(st.tel)}" inputmode="tel" autocomplete="off" placeholder="600 000 000">`;can=st.name.trim().length>1&&st.tel.replace(/\D/g,'').length>=9}
+if(s===3){const nm=esc(st.name.trim().split(' ')[0]);body=`<div class="ok"><div class="tick">✓</div><h4>¡Cita confirmada!</h4><p style="font-size:13px;color:#4f5f77">${tr[st.t][0]}<br>${fmtD(days[st.d])} a las ${hours[st.h]}<br>C/ Míster Lodge, 23 · Parking gratuito</p></div><div class="wa"><small>WhatsApp · recordatorio automático 24 h antes</small>Hola ${nm}, te recordamos tu cita mañana a las ${hours[st.h]} en Like Dental. Responde 1 para confirmar o 2 para cambiarla.</div>`}
+const lab=['Continuar','Continuar','Confirmar cita','Reservar otra cita'][s];
+ph.innerHTML=`<div class="ph-top"><small>Clínica Like Dental</small><div>Reserva tu cita</div><div class="steps">${[0,1,2,3].map(i=>`<i class="${i<=s?'on':''}"></i>`).join('')}</div></div><div class="ph-body">${body}</div><div class="ph-foot">${s>0&&s<3?'<button class="back" data-a="back" aria-label="Atrás">‹</button>':''}<button class="go" data-a="go"${s<3&&!can?' disabled':''}>${lab}</button></div>`};
+ph.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+if(b.dataset.t!=null)st.t=+b.dataset.t;else if(b.dataset.d!=null){st.d=+b.dataset.d;st.h=null}else if(b.dataset.h!=null)st.h=+b.dataset.h;
+else if(b.dataset.a==='back')st.s--;else if(b.dataset.a==='go'){if(st.s===3)Object.assign(st,{s:0,t:null,d:null,h:null,name:'',tel:''});else st.s++}
+draw();if(st.s===2&&b.dataset.a)ph.querySelector('#bn')?.focus({preventScroll:true})});
+ph.addEventListener('input',e=>{if(e.target.id==='bn')st.name=e.target.value;if(e.target.id==='bt')st.tel=e.target.value;const can=st.name.trim().length>1&&st.tel.replace(/\D/g,'').length>=9;ph.querySelector('.go').disabled=!can});
+draw();
+
+/* redes: feeds */
+const T=(w)=>`<svg viewBox="0 0 120 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${w}</svg>`;
+const teeth=(c,y,x=22,s=1)=>{let r='';for(let i=0;i<6;i++)r+=`<rect x="${x+i*13*s}" y="${y}" width="${11*s}" height="${16*s}" rx="${4*s}" fill="${c}"/>`;return r};
+const play='<svg class="ico" viewBox="0 0 16 16"><path d="M4 2.5l9 5.5-9 5.5z" fill="#fff"/></svg>';
+const multi='<svg class="ico" viewBox="0 0 16 16"><rect x="4.5" y="1.5" width="10" height="10" rx="2" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M2 5v8a1 1 0 0 0 1 1h8" fill="none" stroke="#fff" stroke-width="1.6"/></svg>';
+const person=(c,bg)=>`<circle cx="60" cy="62" r="20" fill="${c}"/><path d="M22 150c4-34 20-52 38-52s34 18 38 52z" fill="${c}"/>`;
+const tx=(t,y,sz,c,w=600,f='Outfit')=>t.split('|').map((l,i)=>`<text x="60" y="${y+i*sz*1.12}" font-family="${f}" font-weight="${w}" font-size="${sz}" fill="${c}" text-anchor="middle">${l}</text>`).join('');
+const oldT=[
+[T(`<rect width="120" height="150" fill="#e53935"/><polygon points="60,18 68,34 86,30 76,46 92,56 74,60 80,78 62,68 50,84 46,64 28,66 40,52 26,38 46,38" fill="#ffeb3b"/>${tx('¡¡OFERTA!!',52,12,'#d50000',900,'Arial')}${tx('LIMPIEZA|+ REVISIÓN|SOLO ESTE MES',104,10,'#fff',700,'Arial')}`),'Oferta llena de texto','Colores ajenos a la marca y mensaje de precio: atrae a quien busca lo más barato, no a quien busca confianza.'],
+[T(`<rect width="120" height="150" fill="#2e7d32"/><circle cx="20" cy="20" r="3" fill="#fff"/><circle cx="96" cy="34" r="2" fill="#fff"/><circle cx="104" cy="132" r="2.5" fill="#fff"/><polygon points="60,30 80,80 40,80" fill="#1b5e20"/>${tx('Feliz Navidad|y próspero|año nuevo',100,10,'#ffd54f',400,'Georgia')}`),'Felicitación de fecha','Publicaciones de calendario que no aportan nada a un paciente nuevo ni hablan de la clínica.'],
+[T(`<rect width="120" height="150" fill="#b3e5fc"/><path d="M40 40c10-8 30-8 40 0 8 7 6 26 2 40-3 12-6 28-12 28-5 0-5-16-10-16s-5 16-10 16c-6 0-9-16-12-28-4-14-6-33 2-40z" fill="#fff" stroke="#81d4fa" stroke-width="2"/>${tx('Sonríe :)',134,13,'#0277bd',700,'Comic Sans MS, cursive')}`),'Imagen de banco','Un dibujo de diente genérico no enseña vuestra clínica, ni al equipo, ni un resultado real.'],
+[T(`<rect width="120" height="150" fill="#fafafa"/>${tx('AVISO',40,13,'#000',800,'Arial')}${tx('Les informamos que|durante el mes de|agosto el horario|será de 9 a 14 h.|Disculpen las|molestias.',62,8,'#333',400,'Arial')}`),'Aviso informativo','Texto pequeño, sin imagen y en tono formal: el algoritmo apenas lo enseña y nadie lo guarda.'],
+[T(`<rect width="120" height="150" fill="#7b1fa2"/>${tx('“Una sonrisa|vale más que|mil palabras”',58,11,'#fff',400,'Georgia')}${tx('- Anónimo',112,8,'#e1bee7',400,'Arial')}`),'Frase motivacional','Contenido de relleno que se encuentra en cualquier cuenta. No diferencia a Like Dental.'],
+[T(`<rect width="120" height="150" fill="#90a4ae"/><rect x="18" y="34" width="84" height="56" rx="4" fill="#cfd8dc"/><rect x="30" y="44" width="60" height="36" fill="#b0bec5"/>${tx('Nuestra clínica',118,10,'#fff',600,'Arial')}`),'Foto oscura sin edición','Una sola foto plana de la sala, sin luz ni personas: transmite poco cuidado.'],
+[T(`<rect width="120" height="150" fill="#ff9800"/>${tx('2x1',62,36,'#fff',900,'Arial')}${tx('EN BLANQUEAMIENTO',96,9,'#3e2723',800,'Arial')}${tx('¡Llámanos!',116,10,'#3e2723',700,'Arial')}`),'Promoción tipo cartel','Parece publicidad de supermercado. En salud, el descuento sin contexto resta credibilidad.'],
+[T(`<rect width="120" height="150" fill="#e0e0e0"/><circle cx="60" cy="68" r="34" fill="#bdbdbd"/>${tx('Día Mundial|de la Salud|Bucodental',56,9,'#424242',700,'Arial')}`),'Día mundial genérico','Fechas que publican todas las clínicas el mismo día. No da motivo para elegiros.'],
+[T(`<rect width="120" height="150" fill="#fff59d"/>${tx('¿SABÍAS QUE...?',44,11,'#e65100',800,'Arial')}${tx('El esmalte dental es|la sustancia más dura|del cuerpo humano y|está compuesto en un|96% por minerales...',64,7.5,'#5d4037',400,'Arial')}`),'Dato con muro de texto','La idea es buena, pero en una sola imagen con letra pequeña nadie lo lee en el móvil.']];
+const B='#0a4fb3',I='#a5dcf1',S='#eef7fc';
+const newT=[
+[T(`<rect width="60" height="150" fill="#d9cbb0"/><rect x="60" width="60" height="150" fill="${I}"/>${teeth('#e8d9a8',64,4,.82)}${teeth('#fff',64,64,.82)}<rect x="59" width="2" height="150" fill="#fff"/>${tx('Antes',122,10,'#5d4a2a',500).replace('x="60"','x="30"')}${tx('Después',122,10,B,600).replace('x="60"','x="90"')}`)+play,'Reel antes y después','La prueba visual más potente. El paciente se imagina con ese resultado y reserva. Formato con más alcance.'],
+[T(`<rect width="120" height="150" fill="${S}"/>${tx('¿Duele|ponerse un|implante?',52,15,B,300)}${tx('Desliza  →',128,9,B,600,'Inter')}`)+multi,'Carrusel educativo','Responde a un miedo real. Se guarda y se comparte, y eso multiplica el alcance de forma orgánica.'],
+[T(`<rect width="120" height="150" fill="${B}"/>${person(I)}${tx('Conoce al equipo',24,10,'#fff',500)}`),'El equipo, con nombre y cara','La confianza se cierra con personas. Retrato profesional y presentación de cada doctora.'],
+[T(`<rect width="120" height="150" fill="${I}"/><rect x="18" y="26" width="84" height="70" rx="10" fill="#fff"/>${tx('Testimonio',56,13,B,500)}${tx('de paciente',72,10,B,400)}${tx('15 segundos',116,10,'#073a86',600,'Inter')}`)+play,'Testimonio en vídeo','Un paciente real contándolo en vertical. Es la prueba social que hoy falta en la web.'],
+[T(`<rect width="120" height="150" fill="#fff"/>${tx('3 errores|al cepillarte|los dientes',50,13,'#0b1b33',300)}<rect x="40" y="104" width="40" height="3" rx="2" fill="${B}"/>`)+multi,'Consejo práctico','Contenido útil y limpio en carrusel de 5 láminas: posiciona a Like Dental como la autoridad de la zona.'],
+[T(`<rect width="120" height="150" fill="#073a86"/>${tx('¿Dolor de|muelas?',54,16,'#fff',300)}<rect x="22" y="98" width="76" height="24" rx="12" fill="#ff7a66"/>${tx('Reserva hoy',114,10,'#fff',600,'Inter')}`),'Urgencias con llamada a la acción','Capta al paciente que no tiene dentista. Lleva directo a los huecos de urgencia de la app.'],
+[T(`<rect width="120" height="150" fill="${S}"/><circle cx="60" cy="66" r="26" fill="${I}"/>${teeth('#fff',58,38,.5)}${tx('Primera visita|de los peques',112,11,B,500)}`),'Contenido para familias','Habla al público más fiel: padres de la zona que buscan una clínica para toda la vida.'],
+[T(`<rect width="120" height="150" fill="${I}"/><rect x="14" y="30" width="92" height="64" rx="8" fill="#fff"/><rect x="24" y="40" width="34" height="44" rx="4" fill="${S}"/><rect x="64" y="40" width="32" height="20" rx="4" fill="${B}"/>${tx('Así es Like Dental',118,10,'#073a86',600)}${tx('Parking gratuito',132,8,'#073a86',400,'Inter')}`)+play,'Tour por la clínica','Enseña instalaciones, higiene y tecnología. Resuelve las dudas antes de la primera visita.'],
+[T(`<rect width="120" height="150" fill="${B}"/>${tx('Ortodoncia|invisible:|lo que nadie|te cuenta',44,13,'#fff',300)}`)+multi,'Tratamiento de alto valor','Planificación por temas (el mes de la ortodoncia) para atraer los tratamientos más rentables.']];
+const prof=(o)=>`<div class="ig-head"><div class="av">${o.av}</div><div><div class="ig-name">clinicalikedental</div><div class="ig-cat">${o.cat}</div></div></div><div class="ig-bio">${o.bio}</div><div class="ig-btns">${o.btn}</div><div class="hl">${o.hl}</div><div class="ig-grid">${o.t.map((t,i)=>`<button class="tile" data-i="${i}" aria-label="${t[1]}">${t[0]}</button>`).join('')}</div>`;
+$('#igOld').innerHTML=prof({av:'LOGO',cat:'Dentista',bio:'Clínica dental. Pide tu cita.<br>Villanueva del Pardillo',btn:'<span>Seguir</span><span>Mensaje</span>',hl:['Clínica','Ofertas','Navidad'].map(x=>`<div><b></b>${x}</div>`).join(''),t:oldT});
+$('#igNew').innerHTML=prof({av:'like<br>dental',cat:'Clínica dental · Villanueva del Pardillo',bio:'Implantes, ortodoncia y estética dental<br>Siempre te atienden los mismos profesionales · Parking gratuito<br><a href="#app">Reserva tu cita en 1 minuto</a>',btn:'<span class="pri">Reservar</span><span>Mensaje</span><span>WhatsApp</span>',hl:['Reservar','Equipo','Casos','Opiniones','Urgencias'].map(x=>`<div><b></b>${x}</div>`).join(''),t:newT});
+const note=(el,t)=>{el.innerHTML=`<b>${t[1]}</b>${t[2]}`};
+[['#igOld','#noteOld',oldT],['#igNew','#noteNew',newT]].forEach(([g,n,arr])=>{const G=$(g);note($(n),arr[0]);G.querySelector('.tile').classList.add('sel');
+G.addEventListener('click',e=>{const b=e.target.closest('.tile');if(!b)return;G.querySelectorAll('.tile').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');note($(n),arr[+b.dataset.i])})});
+$('#igSw').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$('#igWrap').dataset.v=b.dataset.v;$('#igSw').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))});
+const cmp=[['Imagen','Colores y estilos distintos en cada publicación','Paleta y tipografía de Like Dental en todo el perfil'],['Formato','Imágenes fijas con mucho texto','50% Reels, carruseles educativos y fotos cuidadas'],['Contenido','Ofertas, fechas señaladas e imágenes de banco','Casos reales, equipo, consejos y testimonios'],['Llamada a la acción','Ninguna, o “llámanos”','“Reserva en 1 minuto” en cada publicación y en la bio'],['Perfil','Bio genérica, sin enlace ni destacados útiles','Zona, especialidades, botón Reservar y destacados que resuelven dudas'],['Resultado','Seguidores que no se convierten en pacientes','Visitas al perfil que acaban en citas en la agenda']];
+$('#cmpRows').innerHTML=cmp.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+
+/* carruseles en móvil */
+const mq=matchMedia('(max-width:700px)');
+document.querySelectorAll('.snap').forEach(sc=>{
+ const nav=document.createElement('div');nav.className='snapnav';
+ nav.innerHTML='<button aria-label="Anterior">‹</button><span></span><button aria-label="Siguiente">›</button>';
+ sc.after(nav);sc.tabIndex=0;const lab=nav.querySelector('span');
+ const idx=()=>{const k=[...sc.children];const c=sc.scrollLeft+sc.clientWidth/2;let b=0,d=1e9;k.forEach((e,i)=>{const m=e.offsetLeft+e.offsetWidth/2,x=Math.abs(m-c);if(x<d){d=x;b=i}});return b};
+ const go=i=>{const k=sc.children;i=Math.max(0,Math.min(k.length-1,i));sc.scrollTo({left:k[i].offsetLeft-(sc.clientWidth-k[i].offsetWidth)/2,behavior:'smooth'})};
+ const upd=()=>{lab.textContent=(idx()+1)+' / '+sc.children.length};
+ nav.children[0].onclick=()=>go(idx()-1);nav.children[2].onclick=()=>go(idx()+1);
+ sc.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(idx()+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(idx()-1)}});
+ sc.addEventListener('scroll',upd,{passive:true});new MutationObserver(upd).observe(sc,{childList:true});upd();
+});
+const centerRec=()=>{if(!mq.matches)return;const sc=$('#plans'),k=sc.children[chosen];if(k)sc.scrollLeft=k.offsetLeft-(sc.clientWidth-k.offsetWidth)/2};
+requestAnimationFrame(centerRec);
+/* barra inferior en móvil */
+const mb=$('#mbar'),hero=$('.hero'),cl=$('.close');
+addEventListener('scroll',()=>{const hb=hero.getBoundingClientRect().bottom,ct=cl.getBoundingClientRect().top;const pr=$('#planes').getBoundingClientRect(),inPlans=pr.top<innerHeight*.6&&pr.bottom>innerHeight*.4;mb.classList.toggle('show',hb<0&&ct>innerHeight&&!inPlans)},{passive:true});
+}</script>
+</body>
+</html>
